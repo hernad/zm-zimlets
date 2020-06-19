@@ -37,10 +37,10 @@
 	<property name="generated.java.dir" location="${generated.dir}/src/java" />
 
 	<property name="zimlets-zss" value="com_zimbra_zss"/>
-	<property name="zimlets" value="com_zimbra_mailarchive,com_zimbra_phone,com_zimbra_url,com_zimbra_email,com_zimbra_date,com_zimbra_ymemoticons,com_zimbra_attachmail,com_zimbra_attachcontacts,com_zimbra_srchhighlighter,com_zimbra_webex"/>
+	<property name="zimlets" value="com_zimbra_mailarchive,com_zimbra_url,com_zimbra_email,com_zimbra_date,com_zimbra_attachmail,com_zimbra_attachcontacts,com_zimbra_srchhighlighter"/>
 	<property name="zimlets-offline" value=""/>
 	<property name="zimlets-example" value="com_zimbra_example_*"/>
-    <property name="zimlets-experimental" value="com_zimbra_amzn,com_zimbra_asterisk,com_zimbra_asteriskmwi,com_zimbra_blog,com_zimbra_browserperf,com_zimbra_edu,com_zimbra_evite,com_zimbra_html,com_zimbra_jspsample,com_zimbra_photo,com_zimbra_po,com_zimbra_videos,com_zimbra_webex,com_zimbra_wikipedia,com_zimbra_xslt,com_zimbra_ytraffic,com_zimbra_calscheduler,com_zimbra_ybabelfish,com_zimbra_speak"/>
+    <property name="zimlets-experimental" value="com_zimbra_amzn,com_zimbra_asterisk,com_zimbra_asteriskmwi,com_zimbra_blog,com_zimbra_browserperf,com_zimbra_edu,com_zimbra_evite,com_zimbra_html,com_zimbra_jspsample,com_zimbra_photo,com_zimbra_po,com_zimbra_videos,com_zimbra_wikipedia,com_zimbra_xslt,com_zimbra_ytraffic,com_zimbra_calscheduler,com_zimbra_ybabelfish,com_zimbra_speak"/>
 
     <!-- zimlets-extra is anything not in zimlets, not in zimlets-example, and not in zimlets-experimental -->
 	<dirset id='zimlets-extra.dirset' dir='${src.zimlet.dir}' includes='*' excludes='${zimlets},${zimlets-experimental},${zimlets-example}'/>
@@ -126,18 +126,7 @@
 			</foreach>
 	</target>
 	
-	<target name="package-zimlets" depends="build-init,compile">
-		<foreach list="${zimlets}" target="package-zimlet" param="zimlet">
-	        <param name="tempdir" value="${generated.dir}/zimlets" />
-	        <param name="destdir" value="${dist.zimlet.dir}" />
-            <param name="zimlet.version" value="${zimlet.version}" />
-            <param name="TS" value="${TS}" />
-		</foreach>
-		<zip destfile="${dist.zimlet.dir}/com_zimbra_phone.zip" update="true">
-			<fileset dir="${build.classes.dir}" includes="**/NANPHandler.class"/>
-		</zip>
-		<echo message="dist.zimlet.dir=${dist.zimlet.dir}" file="${dist.dir}/build.properties"/>
-	</target>
+	
 	<target name="package-zimlets-extra" depends="build-init,compile">
         <foreach list="${zimlets-extra}" target="package-zimlet" param="zimlet">
             <param name="tempdir" value="${generated.dir}/zimlets" />
